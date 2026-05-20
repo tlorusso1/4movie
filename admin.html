@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4Movie — Admin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      min-height: 100vh;
+    }
+    aside {
+      width: 220px;
+      background: #1a1a2e;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid #e50914;
+      flex-shrink: 0;
+    }
+    aside h2 { color: #e50914; font-size: 1.4rem; margin-bottom: 2rem; letter-spacing: 2px; }
+    aside nav a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    aside nav a:hover, aside nav a.active {
+      background: #e50914;
+      color: #fff;
+    }
+    main { flex: 1; padding: 2rem; }
+    main h1 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 1.2rem;
+      text-align: center;
+      border-bottom: 3px solid #e50914;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: bold; color: #e50914; }
+    .stat-card .label { font-size: 0.85rem; color: #aaa; margin-top: 0.3rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1a1a2e;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead { background: #16213e; }
+    th, td { padding: 0.8rem 1rem; text-align: left; font-size: 0.9rem; }
+    th { color: #e50914; font-weight: 600; }
+    tr:not(:last-child) td { border-bottom: 1px solid #252540; }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+    }
+    .badge.ativo { background: #1a4a1a; color: #4caf50; }
+    .badge.inativo { background: #4a1a1a; color: #e57373; }
+    .btn-sm {
+      background: #e50914;
+      color: #fff;
+      border: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-sm:hover { background: #c40812; }
+    .btn-sm.secondary { background: #333; }
+    .btn-sm.secondary:hover { background: #555; }
+    .add-btn {
+      background: #e50914;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: background 0.2s;
+    }
+    .add-btn:hover { background: #c40812; }
+  </style>
+</head>
+<body>
+  <aside>
+    <h2>4MOVIE</h2>
+    <nav>
+      <a href="index.html">Ir ao Site</a>
+      <a href="admin.html" class="active">Dashboard</a>
+      <a href="#">Filmes</a>
+      <a href="#">Séries</a>
+      <a href="#">Usuários</a>
+      <a href="#">Configurações</a>
+    </nav>
+  </aside>
+
+  <main>
+    <h1>Dashboard Admin</h1>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number">128</div>
+        <div class="label">Filmes Cadastrados</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">34</div>
+        <div class="label">Séries Cadastradas</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">1.204</div>
+        <div class="label">Usuários Ativos</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">8.412</div>
+        <div class="label">Acessos Hoje</div>
+      </div>
+    </div>
+
+    <button class="add-btn">+ Adicionar Filme</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Gênero</th>
+          <th>Ano</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Operação Infinita</td>
+          <td>Ação</td>
+          <td>2024</td>
+          <td><span class="badge ativo">Ativo</span></td>
+          <td>
+            <button class="btn-sm">Editar</button>
+            <button class="btn-sm secondary">Remover</button>
+          </td>
+        </tr>
+        <tr>
+          <td>O Último Suspiro</td>
+          <td>Drama</td>
+          <td>2023</td>
+          <td><span class="badge ativo">Ativo</span></td>
+          <td>
+            <button class="btn-sm">Editar</button>
+            <button class="btn-sm secondary">Remover</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Galáxia Perdida</td>
+          <td>Sci-Fi</td>
+          <td>2024</td>
+          <td><span class="badge inativo">Inativo</span></td>
+          <td>
+            <button class="btn-sm">Editar</button>
+            <button class="btn-sm secondary">Remover</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Rio de Risos</td>
+          <td>Comédia</td>
+          <td>2023</td>
+          <td><span class="badge ativo">Ativo</span></td>
+          <td>
+            <button class="btn-sm">Editar</button>
+            <button class="btn-sm secondary">Remover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

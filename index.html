@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4Movie</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #e50914;
+    }
+    header h1 { font-size: 1.8rem; color: #e50914; letter-spacing: 2px; }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #e50914; }
+    .hero {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4), #0d0d0d),
+                  url('https://via.placeholder.com/1600x600/1a1a2e/e50914?text=4Movie') center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      padding: 2rem;
+    }
+    .hero-content h2 { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .hero-content p { color: #aaa; margin-bottom: 1.2rem; max-width: 500px; }
+    .btn {
+      background: #e50914;
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #c40812; }
+    .section { padding: 2rem; }
+    .section h3 { font-size: 1.3rem; margin-bottom: 1rem; color: #e50914; }
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .movie-card {
+      background: #1a1a2e;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .movie-card:hover { transform: scale(1.04); }
+    .movie-card img { width: 100%; display: block; }
+    .movie-card .info { padding: 0.6rem; font-size: 0.85rem; color: #ccc; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #555;
+      font-size: 0.85rem;
+      border-top: 1px solid #222;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>4MOVIE</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="#">Filmes</a>
+      <a href="#">Séries</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h2>Bem-vindo ao 4Movie</h2>
+      <p>Assista aos melhores filmes e séries em um só lugar.</p>
+      <a href="#" class="btn">Explorar Catálogo</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Em Destaque</h3>
+    <div class="movies-grid">
+      <div class="movie-card">
+        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+1" alt="Filme 1" />
+        <div class="info">Filme 1 <br /><small>Ação · 2024</small></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+2" alt="Filme 2" />
+        <div class="info">Filme 2 <br /><small>Drama · 2024</small></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+3" alt="Filme 3" />
+        <div class="info">Filme 3 <br /><small>Comédia · 2023</small></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+4" alt="Filme 4" />
+        <div class="info">Filme 4 <br /><small>Sci-Fi · 2024</small></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 4Movie — Todos os direitos reservados.
+  </footer>
+</body>
+</html>
