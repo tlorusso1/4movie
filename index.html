@@ -3,124 +3,446 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4Movie</title>
+  <title>4movie — Fotografia de Casamento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray: #888;
+      --light: #f2f2f2;
+      --font: 'Space Mono', monospace;
+    }
+
     body {
-      background: #0d0d0d;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      min-height: 100vh;
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font);
+      font-size: 13px;
     }
-    header {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      padding: 1.2rem 2rem;
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid #e8e8e8;
+      padding: 18px 40px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      border-bottom: 2px solid #e50914;
+      justify-content: center;
+      gap: 48px;
     }
-    header h1 { font-size: 1.8rem; color: #e50914; letter-spacing: 2px; }
+
     nav a {
-      color: #ccc;
       text-decoration: none;
-      margin-left: 1.5rem;
-      font-size: 0.95rem;
-      transition: color 0.2s;
+      color: var(--black);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      transition: opacity 0.2s;
     }
-    nav a:hover { color: #e50914; }
+
+    nav a.active, nav a:hover { opacity: 1; font-weight: 700; }
+
+    nav .brand {
+      font-weight: 700;
+      opacity: 1;
+      font-size: 14px;
+    }
+
+    /* HERO TEXT */
     .hero {
-      background: linear-gradient(to bottom, rgba(0,0,0,0.4), #0d0d0d),
-                  url('https://via.placeholder.com/1600x600/1a1a2e/e50914?text=4Movie') center/cover;
-      height: 400px;
-      display: flex;
-      align-items: center;
-      padding: 2rem;
-    }
-    .hero-content h2 { font-size: 2.5rem; margin-bottom: 0.8rem; }
-    .hero-content p { color: #aaa; margin-bottom: 1.2rem; max-width: 500px; }
-    .btn {
-      background: #e50914;
-      color: #fff;
-      border: none;
-      padding: 0.7rem 1.8rem;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .btn:hover { background: #c40812; }
-    .section { padding: 2rem; }
-    .section h3 { font-size: 1.3rem; margin-bottom: 1rem; color: #e50914; }
-    .movies-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 1rem;
-    }
-    .movie-card {
-      background: #1a1a2e;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.2s;
-      cursor: pointer;
-    }
-    .movie-card:hover { transform: scale(1.04); }
-    .movie-card img { width: 100%; display: block; }
-    .movie-card .info { padding: 0.6rem; font-size: 0.85rem; color: #ccc; }
-    footer {
       text-align: center;
-      padding: 2rem;
-      color: #555;
-      font-size: 0.85rem;
-      border-top: 1px solid #222;
-      margin-top: 2rem;
+      padding: 72px 40px 56px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .hero .sub {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .hero .desc {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* FILTER TABS */
+    .filters {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      padding: 0 40px 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--font);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border: 1px solid #ddd;
+      background: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--gray);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* GRID */
+    .grid-container {
+      padding: 0 32px 80px;
+    }
+
+    .photo-grid {
+      columns: 5;
+      column-gap: 6px;
+    }
+
+    @media (max-width: 1100px) { .photo-grid { columns: 4; } }
+    @media (max-width: 800px)  { .photo-grid { columns: 3; } }
+    @media (max-width: 540px)  { .photo-grid { columns: 2; } }
+
+    .photo-card {
+      break-inside: avoid;
+      margin-bottom: 6px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+    }
+
+    .photo-card img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .photo-card:hover img { transform: scale(1.03); }
+
+    .photo-card .info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 14px 14px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .photo-card:hover .info { opacity: 1; }
+
+    .photo-card .info span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* EMPTY STATE */
+    .empty {
+      text-align: center;
+      padding: 100px 40px;
+      color: var(--gray);
+    }
+
+    .empty p { font-size: 13px; line-height: 1.8; }
+    .empty a { color: var(--black); }
+
+    /* LIGHTBOX */
+    .lb {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10,10,10,0.97);
+      align-items: center;
+      justify-content: center;
+    }
+    .lb.open { display: flex; }
+
+    .lb-img-wrap {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .lb-img-wrap img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lb-meta {
+      position: absolute;
+      bottom: -32px;
+      left: 0;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .lb-close {
+      position: fixed;
+      top: 28px; right: 36px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-family: var(--font);
+      background: none;
+      border: none;
+    }
+    .lb-close:hover { color: var(--white); }
+
+    .lb-nav-btn {
+      position: fixed;
+      top: 50%; transform: translateY(-50%);
+      color: rgba(255,255,255,0.3);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-family: var(--font);
+      background: none;
+      border: none;
+      padding: 20px;
+    }
+    .lb-nav-btn:hover { color: var(--white); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+
+    .lb-counter {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.2em;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #e8e8e8;
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: var(--black);
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>4MOVIE</h1>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="#">Filmes</a>
-      <a href="#">Séries</a>
-      <a href="admin.html">Admin</a>
-    </nav>
-  </header>
 
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="brand">4MOVIE</a>
+    <a href="index.html" class="active">Selected</a>
+    <a href="index.html?cat=cerimonia">Cerimônia</a>
+    <a href="index.html?cat=reception">Recepção</a>
+    <a href="index.html?cat=detalhes">Detalhes</a>
+    <a href="index.html?cat=making">Making Of</a>
+  </nav>
+
+  <!-- HERO -->
   <div class="hero">
-    <div class="hero-content">
-      <h2>Bem-vindo ao 4Movie</h2>
-      <p>Assista aos melhores filmes e séries em um só lugar.</p>
-      <a href="#" class="btn">Explorar Catálogo</a>
-    </div>
+    <h1>4movie</h1>
+    <p class="sub">Fotografia de Casamento · Curitiba</p>
+    <p class="desc">
+      Imagens que guardam o que palavras não alcançam.<br>
+      Cada casamento, uma história única.
+    </p>
   </div>
 
-  <div class="section">
-    <h3>Em Destaque</h3>
-    <div class="movies-grid">
-      <div class="movie-card">
-        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+1" alt="Filme 1" />
-        <div class="info">Filme 1 <br /><small>Ação · 2024</small></div>
-      </div>
-      <div class="movie-card">
-        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+2" alt="Filme 2" />
-        <div class="info">Filme 2 <br /><small>Drama · 2024</small></div>
-      </div>
-      <div class="movie-card">
-        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+3" alt="Filme 3" />
-        <div class="info">Filme 3 <br /><small>Comédia · 2023</small></div>
-      </div>
-      <div class="movie-card">
-        <img src="https://via.placeholder.com/160x240/16213e/e50914?text=Filme+4" alt="Filme 4" />
-        <div class="info">Filme 4 <br /><small>Sci-Fi · 2024</small></div>
-      </div>
-    </div>
+  <!-- FILTERS -->
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-cat="all">Todas</button>
+    <button class="filter-btn" data-cat="cerimonia">Cerimônia</button>
+    <button class="filter-btn" data-cat="reception">Recepção</button>
+    <button class="filter-btn" data-cat="detalhes">Detalhes</button>
+    <button class="filter-btn" data-cat="making">Making Of</button>
   </div>
 
+  <!-- GRID -->
+  <div class="grid-container">
+    <div class="photo-grid" id="grid"></div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lb" id="lb">
+    <button class="lb-close" onclick="closeLb()">Fechar ✕</button>
+    <button class="lb-nav-btn lb-prev" onclick="navLb(-1)">← Ant</button>
+    <div class="lb-img-wrap">
+      <img id="lb-img" src="" alt="">
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+    <button class="lb-nav-btn lb-next" onclick="navLb(1)">Próx →</button>
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
-    &copy; 2026 4Movie — Todos os direitos reservados.
+    <span>© 2024 4movie</span>
+    <span>Curitiba, Paraná</span>
+    <a href="admin.html">↗ admin</a>
   </footer>
+
+  <script>
+    // ─── DB ──────────────────────────────────────────────
+    const DB_NAME = '4movie_db', STORE = 'photos', DB_VER = 1;
+    let db;
+
+    function openDB() {
+      return new Promise((res, rej) => {
+        const req = indexedDB.open(DB_NAME, DB_VER);
+        req.onupgradeneeded = e => {
+          const d = e.target.result;
+          if (!d.objectStoreNames.contains(STORE)) {
+            const s = d.createObjectStore(STORE, { keyPath: 'id', autoIncrement: true });
+            s.createIndex('cat', 'cat', { unique: false });
+            s.createIndex('order', 'order', { unique: false });
+          }
+        };
+        req.onsuccess = e => { db = e.target.result; res(db); };
+        req.onerror   = e => rej(e);
+      });
+    }
+
+    function getPhotos() {
+      return new Promise((res, rej) => {
+        const tx = db.transaction(STORE, 'readonly');
+        const req = tx.objectStore(STORE).index('order').getAll();
+        req.onsuccess = () => res(req.result || []);
+        req.onerror   = e => rej(e);
+      });
+    }
+
+    // ─── STATE ───────────────────────────────────────────
+    let allPhotos = [], filtered = [], lbIdx = 0;
+    let currentCat = 'all';
+
+    // ─── RENDER ──────────────────────────────────────────
+    function render(photos) {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+
+      if (!photos.length) {
+        grid.innerHTML = `
+          <div class="empty" style="column-span:all">
+            <p>Nenhuma foto aqui ainda.<br>
+            Use o <a href="admin.html">painel admin</a> para adicionar.</p>
+          </div>`;
+        return;
+      }
+
+      photos.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.innerHTML = `
+          <img src="${p.data}" alt="${p.caption || ''}">
+          ${p.caption ? `<div class="info"><span>${p.caption}</span></div>` : ''}
+        `;
+        card.addEventListener('click', () => openLb(i));
+        grid.appendChild(card);
+      });
+    }
+
+    function applyFilter(cat) {
+      currentCat = cat;
+      filtered = cat === 'all' ? [...allPhotos] : allPhotos.filter(p => p.cat === cat);
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.cat === cat);
+      });
+      render(filtered);
+    }
+
+    // ─── LIGHTBOX ────────────────────────────────────────
+    function openLb(idx) {
+      lbIdx = idx;
+      showLb();
+      document.getElementById('lb').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLb() {
+      const p = filtered[lbIdx];
+      document.getElementById('lb-img').src   = p.data;
+      document.getElementById('lb-meta').textContent = p.caption || '';
+      document.getElementById('lb-counter').textContent = `${lbIdx + 1} / ${filtered.length}`;
+    }
+
+    function closeLb() {
+      document.getElementById('lb').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function navLb(dir) {
+      lbIdx = (lbIdx + dir + filtered.length) % filtered.length;
+      showLb();
+    }
+
+    document.getElementById('lb').addEventListener('click', e => {
+      if (e.target === document.getElementById('lb')) closeLb();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lb').classList.contains('open')) return;
+      if (e.key === 'Escape')      closeLb();
+      if (e.key === 'ArrowRight')  navLb(1);
+      if (e.key === 'ArrowLeft')   navLb(-1);
+    });
+
+    // ─── FILTER BUTTONS ──────────────────────────────────
+    document.getElementById('filters').addEventListener('click', e => {
+      if (e.target.classList.contains('filter-btn')) {
+        applyFilter(e.target.dataset.cat);
+      }
+    });
+
+    // ─── URL param cat ───────────────────────────────────
+    const urlCat = new URLSearchParams(location.search).get('cat');
+
+    // ─── BOOT ────────────────────────────────────────────
+    openDB().then(() => getPhotos()).then(photos => {
+      allPhotos = photos.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      applyFilter(urlCat || 'all');
+    });
+  </script>
 </body>
 </html>
